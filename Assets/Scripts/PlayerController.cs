@@ -35,17 +35,19 @@ public class PlayerController : MonoBehaviour
     public Sprite[] states = new Sprite[0];
     public SpriteRenderer sprite = null;
 
+    public GameObject[] generatorsToDeactivate = new GameObject[0];
+
     public Transform wheel;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        isFadingOut = false;
     }
 
     void FixedUpdate()
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        Rigidbody2D rb = GetComponentInChildren<Rigidbody2D>();
         var scrollingController = ScrollingController.GetInstance();
 
         var scrollVelocity = new Vector2(-scrollingController.scrollingSpeed, 0.0f);
@@ -53,9 +55,7 @@ public class PlayerController : MonoBehaviour
         bool alive = IsAlive;
         float horizontalAxis = alive ? Input.GetAxis("Horizontal") : 0.0f;
         float verticalAxis = alive ? Input.GetAxis("Vertical") : 0.0f;
-        var accelerationMagnitude = Mathf.Sqrt(horizontalAxis * horizontalAxis + verticalAxis * verticalAxis);
-
-        
+        var accelerationMagnitude = Mathf.Sqrt(horizontalAxis * horizontalAxis + verticalAxis * verticalAxis);      
 
         // Tilt the player according to the velocity in the previous frame.
         var angle = Mathf.Max(minTilt, Mathf.Min(maxTilt, baseTilt - tiltScaling * horizontalAxis));
@@ -89,6 +89,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private Vector3 oldPosition;
+    private bool isFadingOut = false;
+
     private void Update()
     {
         var scrollingController = ScrollingController.GetInstance();
@@ -107,10 +109,18 @@ public class PlayerController : MonoBehaviour
             GetComponentInChildren<SpriteAnimationController>().enabled = true;
 
             // Start countdown until any key will work.
-            if (deathTime == 0.0f) deathTime = Time.time;
-            if (Input.anyKey && deathTime + deathDelay < Time.time)
+            if (deathTime == 0.0f) deathTime = Time.time + deathDelay;
+            if (deathTime < Time.time)
             {
-                SceneManager.LoadScene(0);
+                foreach (GameObject generator in generatorsToDeactivate) generator.SetActive(false);
+            }
+            if (Input.anyKey && !isFadingOut)
+            {
+                isFadingOut = true;
+                var fader = GameObject.FindGameObjectWithTag("ScreenFade").GetComponent<ScreenFadeController>();
+                fader.FadeOut();
+
+                Invoke("RestartScene", 1.0f);
             }
         }
         else
@@ -119,6 +129,11 @@ public class PlayerController : MonoBehaviour
             var state = Mathf.Max(0, Mathf.Min((int)health.health - 1, states.Length - 1));
             sprite.sprite = states[state];
         }
+    }
+
+    private void RestartScene()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public bool IsAlive

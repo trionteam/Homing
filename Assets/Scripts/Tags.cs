@@ -10,4 +10,5 @@ static class Tags
     public static readonly string Player = "Player";
     public static readonly string ScrollingController = "ScrollingController";
     public static readonly string Generator = "Generator";
+    public static readonly string Logo = "Logo";
 }

@@ -52,7 +52,7 @@ public class MissileController : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("ScreenBounds"))
         {
             // The missile entered the screen. Remove the warning.
-            Destroy(warning.gameObject);
+            if (warning != null) Destroy(warning.gameObject);
             warning = null;
         }
 
@@ -67,8 +67,7 @@ public class MissileController : MonoBehaviour
         //var obstacle = collision.GetComponentInParent<ObstacleController>();
         if (collision.gameObject.layer == LayerMask.NameToLayer("MissileTarget"))
         {
-            if (transform.position.x >= minExplodeX)
-            Explode(health);
+            if (transform.position.x >= minExplodeX) Explode(health);
         }
 
     }

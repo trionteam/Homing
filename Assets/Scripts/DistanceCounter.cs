@@ -16,8 +16,13 @@ public class DistanceCounter : MonoBehaviour
     public Text positiveScoreText;
     public Text negativeScoreText;
 
+    public PlayerController player;
+
     public void PostScore(float score, Transform where)
     {
+        // Only count score when the player is alive.
+        if (!player.IsAlive) return;
+
         distance += score;
         var parent = gameObject.GetComponentInParent<Canvas>().gameObject;
         var scoreTextPrefab = score > 0.0f ? positiveScoreText : negativeScoreText;
@@ -39,6 +44,7 @@ public class DistanceCounter : MonoBehaviour
         ScrollingController scrollingController = ScrollingController.GetInstance();
 
         distance += scrollingController.scrollingSpeed * Time.deltaTime;
+        distance = Mathf.Max(0.0f, distance);
 
         var text = GetComponent<Text>();
         text.text = string.Format("{0}", scoreMultiplier * (int)distance);

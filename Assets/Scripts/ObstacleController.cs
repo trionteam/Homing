@@ -10,7 +10,19 @@ public class ObstacleController : MonoBehaviour
     {
         var scrollingController = ScrollingController.GetInstance();
         var rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(-scrollingController.scrollingSpeed * scrollingScaling, 0.0f);
+        if (rb != null)
+        {
+            var oldPosition = rb.position;
+            oldPosition.x -= scrollingController.scrollingSpeed * scrollingScaling * Time.fixedDeltaTime;
+            rb.MovePosition(oldPosition);
+            rb.velocity = new Vector2();
+        }
+        else
+        {
+            var oldPosition = transform.position;
+            oldPosition.x -= scrollingController.scrollingSpeed * scrollingScaling * Time.fixedDeltaTime;
+            transform.position = oldPosition;
+        }
     }
 
     // Update is called once per frame

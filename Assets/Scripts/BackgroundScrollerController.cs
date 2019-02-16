@@ -51,10 +51,10 @@ public class BackgroundScrollerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         var scrollingController = ScrollingController.GetInstance();
-        var delta = scrollSpeedFactor * scrollingController.scrollingSpeed * Time.deltaTime;
+        var delta = scrollSpeedFactor * scrollingController.scrollingSpeed * Time.fixedDeltaTime;
         foreach (var child in GetComponentsInChildren<Transform>())
         {
             if (child == transform) continue;
