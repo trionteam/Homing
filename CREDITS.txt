@@ -1,0 +1,10 @@
+A Trion Team game
+-----------------
+Graphics by Peregrine
+Coding by OndraSej
+Design by... ain't nobody got time for that
+
+Resources used:
+Font: Trueno by Julieta Ulanovsky
+Sound effects: http://www.freesfx.co.uk
+Music: Funshine by Kevin MacLeod (https://freepd.com/)
