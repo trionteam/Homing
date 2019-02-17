@@ -10,12 +10,15 @@ public class ScreenFadeController : MonoBehaviour
 
     public bool isFading = false;
 
+    public AudioSource ambientAudio = null;
+
+    float targetVolume = 1.0f;
+
     void Start()
     {
-        isFading = true;
-        fadeIn = true;
+        targetVolume = ambientAudio.volume;
 
-        GetComponent<MeshRenderer>().enabled = true;
+        FadeIn();
     }
 
     public void FadeIn()
@@ -61,5 +64,11 @@ public class ScreenFadeController : MonoBehaviour
             isFading = false;
         }
         material.color = color;
+
+        var volumeFadeSpeed = targetVolume / fadeDuration;
+        var volumeDelta = Time.deltaTime * volumeFadeSpeed;
+        if (!fadeIn) ambientAudio.volume -= volumeDelta;
+
+        if (!fadeIn && ambientAudio.volume <= 0.0f) ambientAudio.volume = 0.0f;
     }
 }

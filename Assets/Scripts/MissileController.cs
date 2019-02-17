@@ -20,14 +20,23 @@ public class MissileController : MonoBehaviour
 
     public Transform warning = null;
 
-    public float toBoundHorizontal = -8.9f;
-    public float toBoundVertical = 5.0f;
+    public float toBoundHorizontal = 8.9f;
+    public float toBoundVertical = 4.9f;
 
     // Start is called before the first frame update
     void Start()
     {
         var rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.right;
+
+        // Quick and dirty fix for 16:10 displays (on Mac and older laptops). We
+        // update the bounds where the missile warnings are displayed to match
+        // the width.
+        var mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        if (Mathf.Abs(mainCamera.aspect - 1.6f) <= 0.001)
+        {
+            toBoundHorizontal = 8.0f; 
+        }
     }
 
     // Update is called once per frame

@@ -344,7 +344,7 @@ MonoBehaviour:
     type: 3}
   velocity: 5.5
   maxTurnPerFrame: 2
-  minExplodeX: -8
+  minExplodeX: -7.7
   zPosition: -8
   damage: 1
   warning: {fileID: 4801368509232127973}
