@@ -6,6 +6,8 @@ public class ObstacleController : MonoBehaviour
 {
     public float scrollingScaling = 1.0f;
 
+    public float destroyPositionOffset = 4.0f;
+
     private void FixedUpdate()
     {
         var scrollingController = ScrollingController.GetInstance();
@@ -28,7 +30,7 @@ public class ObstacleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < -15.0f)
+        if (transform.position.x < ScreenBoundsController.Instance.leftBound - destroyPositionOffset)
         {
             Destroy(gameObject);
         }

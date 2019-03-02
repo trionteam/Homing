@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlaySoundOnCollision.cs" />
     <Compile Include="Assets\Scripts\ScoreFloatController.cs" />
+    <Compile Include="Assets\Scripts\ScreenBoundsController.cs" />
     <Compile Include="Assets\Scripts\ScreenFadeController.cs" />
     <Compile Include="Assets\Scripts\ScrollingController.cs" />
     <Compile Include="Assets\Scripts\ShadowController.cs" />

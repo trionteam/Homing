@@ -7,8 +7,10 @@ public class PlayerController : MonoBehaviour
 {
     public float velocityScaling = 1.0f;
 
-    public float minX = -10.0f;
-    public float maxX = 10.0f;
+    public float verticalMargin = 1.0f;
+
+    float MinX { get { return ScreenBoundsController.Instance.leftBound + verticalMargin; } }
+    float MaxX { get { return ScreenBoundsController.Instance.rightBound - verticalMargin; } }
 
     public float minY = -4.5f;
     public float maxY = 4.5f;
@@ -55,7 +57,7 @@ public class PlayerController : MonoBehaviour
         bool alive = IsAlive;
         float horizontalAxis = alive ? Input.GetAxis("Horizontal") : 0.0f;
         float verticalAxis = alive ? Input.GetAxis("Vertical") : 0.0f;
-        var accelerationMagnitude = Mathf.Sqrt(horizontalAxis * horizontalAxis + verticalAxis * verticalAxis);      
+        var accelerationMagnitude = Mathf.Sqrt(horizontalAxis * horizontalAxis + verticalAxis * verticalAxis);
 
         // Tilt the player according to the velocity in the previous frame.
         var angle = Mathf.Max(minTilt, Mathf.Min(maxTilt, baseTilt - tiltScaling * horizontalAxis));
@@ -69,8 +71,8 @@ public class PlayerController : MonoBehaviour
         if (position.y < minY) position.y = minY;
         if (position.y > maxY) position.y = maxY;
 
-        if (position.x > maxX) position.x = maxX;
-        if (position.x < minX) position.x = minX;
+        if (position.x > MaxX) position.x = MaxX;
+        if (position.x < MinX) position.x = MinX;
         rb.position = position;
 
         transform.position = new Vector3(position.x, position.y, transform.position.z);
