@@ -43,6 +43,8 @@ public class ScreenFadeController : MonoBehaviour
     {
         if (!isFading) return;
 
+        transform.localScale = new Vector3(ScreenBoundsController.Instance.screenWidth * 1.1f, ScreenBoundsController.Instance.screenHeight * 1.1f);
+
         var fadeSpeed = 1.0f / fadeDuration;
         var renderer = GetComponent<MeshRenderer>();
         var material = renderer.material;

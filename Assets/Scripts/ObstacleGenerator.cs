@@ -19,8 +19,8 @@ public class ObstacleGenerator : MonoBehaviour
     public float obstacleTime = 0.5f;
     public float nextObstacleTime = 0.0f;
 
-    public float obstaclePositionX = 10.0f;
-    public float destroyAtPositionX = -15.0f;
+    public float newObstaclePositionOffset = 4.0f;
+    float ObstaclePositionX { get { return ScreenBoundsController.Instance.rightBound + newObstaclePositionOffset; } }
 
     public float minObstacleY = -5.0f;
     public float maxObstacleY = 5.0f;
@@ -40,7 +40,7 @@ public class ObstacleGenerator : MonoBehaviour
             Debug.Assert(minObstacleY < maxObstacleY);
             var delta = maxObstacleY - minObstacleY;
             var obstaclePositionY = minObstacleY + Random.value * delta;
-            var newObstaclePosition = new Vector3(obstaclePositionX, obstaclePositionY, transform.position.z);
+            var newObstaclePosition = new Vector3(ObstaclePositionX, obstaclePositionY, transform.position.z);
             var prefab = WeightedChoice.Choice<WeightedObstacleController, ObstacleController>(weightedObstaclePrefabs);
             var obstacle = Instantiate(prefab, newObstaclePosition, Quaternion.identity);
             nextObstacleTime += obstacleTime;
