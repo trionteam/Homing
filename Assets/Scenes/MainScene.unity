@@ -736,7 +736,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dd703daf78b14564394b83ebfe23230d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e65323564b10df845b2b18db4ae0a66f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1914,6 +1914,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 16c1b399261224246a838deedd25d3a3, type: 3}
   - {fileID: 21300000, guid: dd703daf78b14564394b83ebfe23230d, type: 3}
   sprite: {fileID: 1665622921}
+  horizontalAxisName: 
+  verticalAxisName: 
+  controlSuffix: -1
   wheel: {fileID: 1253004946}
 --- !u!70 &1491036490
 CapsuleCollider2D:
@@ -2757,6 +2760,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2fbf10c05f326a243ae8380af89b0223, type: 3}
   - {fileID: 21300000, guid: e65323564b10df845b2b18db4ae0a66f, type: 3}
   sprite: {fileID: 432050950}
+  horizontalAxisName: 
+  verticalAxisName: 
+  controlSuffix: -2
   wheel: {fileID: 1045698223}
 --- !u!50 &1708300876
 Rigidbody2D:

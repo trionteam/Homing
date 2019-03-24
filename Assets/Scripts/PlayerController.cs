@@ -34,7 +34,17 @@ public class PlayerController : MonoBehaviour
     public Sprite[] states = new Sprite[0];
     public SpriteRenderer sprite = null;
 
+    public string horizontalAxisName = null;
+    public string verticalAxisName = null;
+    public string controlSuffix = "";
+
     public Transform wheel;
+
+    void Start()
+    {
+        if (string.IsNullOrEmpty(horizontalAxisName)) horizontalAxisName = "Horizontal" + controlSuffix;
+        if (string.IsNullOrEmpty(verticalAxisName)) verticalAxisName = "Vertical" + controlSuffix;
+    }
 
     void FixedUpdate()
     {
@@ -44,8 +54,8 @@ public class PlayerController : MonoBehaviour
         var scrollVelocity = new Vector2(-scrollingController.scrollingSpeed, 0.0f);
 
         bool alive = IsAlive;
-        float horizontalAxis = alive ? Input.GetAxis("Horizontal") : 0.0f;
-        float verticalAxis = alive ? Input.GetAxis("Vertical") : 0.0f;
+        float horizontalAxis = alive ? Input.GetAxis(horizontalAxisName) : 0.0f;
+        float verticalAxis = alive ? Input.GetAxis(verticalAxisName) : 0.0f;
         var accelerationMagnitude = Mathf.Sqrt(horizontalAxis * horizontalAxis + verticalAxis * verticalAxis);
 
         // Tilt the player according to the velocity in the previous frame.
