@@ -62,8 +62,14 @@ public class PlayerController : MonoBehaviour
         var angle = Mathf.Max(minTilt, Mathf.Min(maxTilt, baseTilt - tiltScaling * horizontalAxis));
         rb.rotation = Mathf.LerpAngle(rb.rotation, angle, 0.1f);
 
-        var playerVelocity = new Vector2(velocityModifier * (velocityScaling * horizontalAxis + scrollingController.scrollingSpeed), velocityModifier * velocityScaling * verticalAxis);
+        var playerVelocity = Vector2.zero;
+        if (alive)
+        {
+            playerVelocity = new Vector2(velocityModifier * (velocityScaling * horizontalAxis + scrollingController.scrollingSpeed),
+                                         velocityModifier * velocityScaling * verticalAxis);
+        }
         var targetVelocity = playerVelocity + scrollVelocity;
+        //if (!IsAlive) targetVelocity -= scrollVelocity;
         rb.velocity = Vector2.Lerp(rb.velocity, targetVelocity, 0.3f);
 
         var position = rb.position;
@@ -71,14 +77,13 @@ public class PlayerController : MonoBehaviour
         if (position.y > maxY) position.y = maxY;
 
         if (position.x > MaxX) position.x = MaxX;
-        if (position.x < MinX) position.x = MinX;
+        if (alive && position.x < MinX) position.x = MinX;
         rb.position = position;
 
         transform.position = new Vector3(position.x, position.y, transform.position.z);
 
         // Update the pitch.
         var audio = GetComponent<AudioSource>();
-        var velocity = rb.velocity - scrollVelocity;
         var targetPitch = basePitch + accelerationMagnitude * pitchRatio;
         audio.pitch = Mathf.Lerp(audio.pitch, targetPitch, 0.1f);
     }

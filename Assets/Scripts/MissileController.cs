@@ -25,21 +25,28 @@ public class MissileController : MonoBehaviour
     float BottomBound { get { return ScreenBoundsController.Instance.bottomBound + warningOffset; } }
     float TopBound { get { return ScreenBoundsController.Instance.topBound - warningOffset; } }
 
-    PlayerController FindClosestPlayer()
+    PlayerController FindClosestPlayer(bool skipDead)
     {
         var playerObjects = GameObject.FindGameObjectsWithTag(Tags.Player);
         float minDistance = Mathf.Infinity;
-        GameObject closest = null;
+        PlayerController closest = null;
         foreach (var playerObject in playerObjects)
         {
+            var player = playerObject.GetComponent<PlayerController>();
+            if (skipDead && !player.IsAlive) continue;
             var distance = (transform.position - playerObject.transform.position).sqrMagnitude;
             if (distance < minDistance)
             {
                 minDistance = distance;
-                closest = playerObject;
+                closest = player;
             }
         }
-        return closest.GetComponent<PlayerController>();
+        return closest;
+    }
+
+    PlayerController FindClosestPlayer()
+    {
+        return FindClosestPlayer(true) ?? FindClosestPlayer(false);
     }
 
     void Start()
