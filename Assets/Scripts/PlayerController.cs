@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -29,23 +28,13 @@ public class PlayerController : MonoBehaviour
 
     public float wheelRotationScaling = 10.0f;
 
-    public float deathSlowdown = 0.005f;
-
     public float deathTime = 0.0f;
     public float deathDelay = 5.0f;
 
     public Sprite[] states = new Sprite[0];
     public SpriteRenderer sprite = null;
 
-    public GameObject[] generatorsToDeactivate = new GameObject[0];
-
     public Transform wheel;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        isFadingOut = false;
-    }
 
     void FixedUpdate()
     {
@@ -82,16 +71,9 @@ public class PlayerController : MonoBehaviour
         var velocity = rb.velocity - scrollVelocity;
         var targetPitch = basePitch + accelerationMagnitude * pitchRatio;
         audio.pitch = Mathf.Lerp(audio.pitch, targetPitch, 0.1f);
-
-        // Stop the scrolling if the player is dead.
-        if (!IsAlive)
-        {
-            scrollingController.scrollingSpeed = Mathf.Lerp(scrollingController.scrollingSpeed, 0.0f, deathSlowdown);
-        }
     }
 
     private Vector3 oldPosition;
-    private bool isFadingOut = false;
 
     private void Update()
     {
@@ -109,21 +91,6 @@ public class PlayerController : MonoBehaviour
         {
             // Enable the animator. This also switches the player to the wrecked state.
             GetComponentInChildren<SpriteAnimationController>().enabled = true;
-
-            // Start countdown until any key will work.
-            if (deathTime == 0.0f) deathTime = Time.time + deathDelay;
-            if (deathTime < Time.time)
-            {
-                foreach (GameObject generator in generatorsToDeactivate) generator.SetActive(false);
-            }
-            if (Input.anyKey && !isFadingOut)
-            {
-                isFadingOut = true;
-                var fader = GameObject.FindGameObjectWithTag("ScreenFade").GetComponent<ScreenFadeController>();
-                fader.FadeOut();
-
-                Invoke("RestartScene", 1.0f);
-            }
         }
         else
         {
@@ -131,11 +98,6 @@ public class PlayerController : MonoBehaviour
             var state = Mathf.Max(0, Mathf.Min((int)health.health - 1, states.Length - 1));
             sprite.sprite = states[state];
         }
-    }
-
-    private void RestartScene()
-    {
-        SceneManager.LoadScene(0);
     }
 
     public bool IsAlive
