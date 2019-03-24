@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform wheel;
 
+    public bool isLastPlayer = false;
+
     void Start()
     {
         if (string.IsNullOrEmpty(horizontalAxisName)) horizontalAxisName = "Horizontal" + controlSuffix;
@@ -77,7 +79,7 @@ public class PlayerController : MonoBehaviour
         if (position.y > maxY) position.y = maxY;
 
         if (position.x > MaxX) position.x = MaxX;
-        if (alive && position.x < MinX) position.x = MinX;
+        if ((alive || isLastPlayer) && position.x < MinX) position.x = MinX;
         rb.position = position;
 
         transform.position = new Vector3(position.x, position.y, transform.position.z);
@@ -101,8 +103,8 @@ public class PlayerController : MonoBehaviour
         audio.panStereo = transform.position.x / 10.0f;
         oldPosition = transform.position;
 
-
-        if (!IsAlive)
+        var alive = IsAlive;
+        if (!alive)
         {
             // Enable the animator. This also switches the player to the wrecked state.
             GetComponentInChildren<SpriteAnimationController>().enabled = true;
@@ -112,6 +114,17 @@ public class PlayerController : MonoBehaviour
             var health = GetComponent<HealthController>();
             var state = Mathf.Max(0, Mathf.Min((int)health.health - 1, states.Length - 1));
             sprite.sprite = states[state];
+        }
+
+        if (alive)
+        {
+            int alivePlayers = 0;
+            foreach (var playerObject in GameObject.FindGameObjectsWithTag(Tags.Player))
+            {
+                var player = playerObject.GetComponent<PlayerController>();
+                if (player.IsAlive) alivePlayers++;
+            }
+            isLastPlayer = alivePlayers == 1;
         }
     }
 
