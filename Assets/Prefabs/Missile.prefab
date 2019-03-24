@@ -339,17 +339,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4385a0e51bfbdf64fa4eed801ff6e614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   explosionPrefab: {fileID: 5062628069351860185, guid: f3e5f1ef7f6704d41b03396f47950379,
     type: 3}
   velocity: 5.5
-  maxTurnPerFrame: 2
-  minExplodeX: -7.7
+  maxTurnPerFrame: 0.7
+  minExplodeOffset: 2
   zPosition: -8
   damage: 1
   warning: {fileID: 4801368509232127973}
-  toBoundHorizontal: 8.9
-  toBoundVertical: 4.9
+  warningOffset: 0.1
 --- !u!50 &1313145532204061976
 Rigidbody2D:
   serializedVersion: 4

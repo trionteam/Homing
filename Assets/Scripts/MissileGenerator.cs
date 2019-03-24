@@ -37,7 +37,6 @@ public class MissileGenerator : MonoBehaviour
             // Add new missile.
             var y = Random.Range(backMinY, backMaxY);
             var newMissile = Instantiate(missilePrefab, NewMissilePosition(), Quaternion.identity).GetComponent<MissileController>();
-            newMissile.player = GameObject.FindGameObjectWithTag(Tags.Player).GetComponent<PlayerController>();
             lastMissile = Mathf.Max(Time.time, lastMissile);
         }
     }

@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class MissileController : MonoBehaviour
 {
-    public PlayerController player = null;
-
     public ExplosionController explosionPrefab = null;
 
     public float velocity = 1.0f;
 
-    public float maxTurnPerFrame = 2.0f;
+    public float maxTurnPerFrame = 0.5f;
 
     public float minExplodeOffset = 2.0f;
     float MinExplodeX { get { return ScreenBoundsController.Instance.leftBound + minExplodeOffset; } }
@@ -27,25 +25,43 @@ public class MissileController : MonoBehaviour
     float BottomBound { get { return ScreenBoundsController.Instance.bottomBound + warningOffset; } }
     float TopBound { get { return ScreenBoundsController.Instance.topBound - warningOffset; } }
 
-    // Start is called before the first frame update
+    PlayerController FindClosestPlayer()
+    {
+        var playerObjects = GameObject.FindGameObjectsWithTag(Tags.Player);
+        float minDistance = Mathf.Infinity;
+        GameObject closest = null;
+        foreach (var playerObject in playerObjects)
+        {
+            var distance = (transform.position - playerObject.transform.position).sqrMagnitude;
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closest = playerObject;
+            }
+        }
+        return closest.GetComponent<PlayerController>();
+    }
+
     void Start()
     {
         var rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.right;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         var scrollingController = ScrollingController.GetInstance();
 
         var rb = GetComponent<Rigidbody2D>();
+        var player = FindClosestPlayer();
         var playerRb = player.GetComponent<Rigidbody2D>();
         var direction = playerRb.position - rb.position;
-        // TODO(ondrasej): Limit the difference in angles (limit angle delta per frame?)
-        var rotation = Vector2.SignedAngle(Vector2.right, direction);
-        var oldRotation = rb.rotation;
-        rb.velocity = direction.normalized * velocity - new Vector2(scrollingController.scrollingSpeed, 0.0f);
+        var targetRotation = Vector2.SignedAngle(Vector2.right, direction);
+        var rotation = Mathf.MoveTowardsAngle(rb.rotation, targetRotation, maxTurnPerFrame);
+
+        var rotationRad = Mathf.Deg2Rad * rotation;
+        direction = new Vector2(Mathf.Cos(rotationRad), Mathf.Sin(rotationRad));
+        rb.velocity = direction * velocity - new Vector2(scrollingController.scrollingSpeed, 0.0f);
         rb.MoveRotation(rotation);
     }
 
@@ -80,6 +96,7 @@ public class MissileController : MonoBehaviour
     {
         if (warning != null)
         {
+            var player = FindClosestPlayer();
             var playerPos = player.transform.position;
             var pos = transform.position;
             var dir = (pos - playerPos);
