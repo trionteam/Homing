@@ -64,7 +64,10 @@ public class MissileController : MonoBehaviour
         var playerRb = player.GetComponent<Rigidbody2D>();
         var direction = playerRb.position - rb.position;
         var targetRotation = Vector2.SignedAngle(Vector2.right, direction);
-        var rotation = Mathf.MoveTowardsAngle(rb.rotation, targetRotation, maxTurnPerFrame);
+        // Allow arbitrary rotations when the missile is off the screen. Once it enters the screen
+        // apply the rotation limits.
+        var rotation = warning != null ?
+            targetRotation : Mathf.MoveTowardsAngle(rb.rotation, targetRotation, maxTurnPerFrame);
 
         var rotationRad = Mathf.Deg2Rad * rotation;
         direction = new Vector2(Mathf.Cos(rotationRad), Mathf.Sin(rotationRad));
