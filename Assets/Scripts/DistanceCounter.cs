@@ -9,8 +9,6 @@ public class DistanceCounter : MonoBehaviour
 
     public int scoreMultiplier = 10;
 
-    public static DistanceCounter Instance { get; private set; }
-
     public Camera screenCamera;
 
     public Text positiveScoreText;
@@ -18,13 +16,20 @@ public class DistanceCounter : MonoBehaviour
 
     public PlayerController player;
 
+    public Canvas canvas;
+
+    public int Score
+    {
+        get { return (int)distance * scoreMultiplier;  }
+    }
+
     public void PostScore(float score, Transform where)
     {
         // Only count score when the player is alive.
-        if (!player.IsAlive) return;
+        if (!player.IsAlive || !player.isActive) return;
 
         distance += score;
-        var parent = gameObject.GetComponentInParent<Canvas>().gameObject;
+        var parent = canvas.gameObject;
         var scoreTextPrefab = score > 0.0f ? positiveScoreText : negativeScoreText;
         var scoreText = Instantiate(scoreTextPrefab, parent.transform).GetComponent<Text>();
         scoreText.text = string.Format("{0}", (int)score * scoreMultiplier);
@@ -35,7 +40,7 @@ public class DistanceCounter : MonoBehaviour
 
     private void Start()
     {
-        Instance = this;
+        player = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -43,10 +48,10 @@ public class DistanceCounter : MonoBehaviour
     {
         ScrollingController scrollingController = ScrollingController.GetInstance();
 
-        distance += scrollingController.scrollingSpeed * Time.deltaTime;
-        distance = Mathf.Max(0.0f, distance);
-
-        var text = GetComponent<Text>();
-        text.text = string.Format("{0}", scoreMultiplier * (int)distance);
+        if (player.isActive)
+        {
+            distance += scrollingController.scrollingSpeed * Time.deltaTime;
+            distance = Mathf.Max(0.0f, distance);
+        }
     }
 }

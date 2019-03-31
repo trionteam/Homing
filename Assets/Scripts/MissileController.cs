@@ -25,6 +25,8 @@ public class MissileController : MonoBehaviour
     float BottomBound { get { return ScreenBoundsController.Instance.bottomBound + warningOffset; } }
     float TopBound { get { return ScreenBoundsController.Instance.topBound - warningOffset; } }
 
+    private PlayerController targetPlayer;
+
     PlayerController FindClosestPlayer(bool skipDead)
     {
         var playerObjects = GameObject.FindGameObjectsWithTag(Tags.Player);
@@ -60,8 +62,8 @@ public class MissileController : MonoBehaviour
         var scrollingController = ScrollingController.GetInstance();
 
         var rb = GetComponent<Rigidbody2D>();
-        var player = FindClosestPlayer();
-        var playerRb = player.GetComponent<Rigidbody2D>();
+        targetPlayer = FindClosestPlayer();
+        var playerRb = targetPlayer.GetComponent<Rigidbody2D>();
         var direction = playerRb.position - rb.position;
         var targetRotation = Vector2.SignedAngle(Vector2.right, direction);
         // Allow arbitrary rotations when the missile is off the screen. Once it enters the screen
@@ -142,7 +144,7 @@ public class MissileController : MonoBehaviour
 
         if (hitObject)
         {
-            hitObject.health -= damage;
+            hitObject.Hit(damage, targetPlayer);
         }
     }
 }

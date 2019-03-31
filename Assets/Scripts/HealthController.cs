@@ -14,6 +14,12 @@ public class HealthController : MonoBehaviour
 
     public Sprite destroyedSprite;
 
+    public void Hit(float damage, PlayerController targetPlayer)
+    {
+        health -= damage;
+        if (health <= 0.0f) OnDestroyed(targetPlayer);
+    }
+
     private void Start()
     {
         wasDestroyed = false;
@@ -21,33 +27,38 @@ public class HealthController : MonoBehaviour
 
     private void Update()
     {
-        if (health <= 0.0f)
+        if (health <= 0.0f) OnDestroyed(null);
+    }
+
+    private void OnDestroyed(PlayerController targetPlayer)
+    {
+        if (wasDestroyed) return;
+
+        if (destroyedSprite != null)
         {
-            if (destroyedSprite != null)
-            {
-                var spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-                spriteRenderer.sprite = destroyedSprite;
-            }
-            if (disableColliders)
-            {
-                foreach (var collider in GetComponentsInChildren<Collider2D>())
-                {
-                    collider.enabled = false;
-                }
-            }
-            if (score != 0.0f && !wasDestroyed)
-            {
-                DistanceCounter.Instance.PostScore(score, transform);
-            }
-            if (!wasDestroyed)
-            {
-                var audioSource = GetComponentInParent<AudioSource>();
-                if (audioSource != null)
-                {
-                    if (!audioSource.isPlaying) audioSource.Play();
-                }
-            }
-            wasDestroyed = true;
+            var spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            spriteRenderer.sprite = destroyedSprite;
         }
+        if (disableColliders)
+        {
+            foreach (var collider in GetComponentsInChildren<Collider2D>())
+            {
+                collider.enabled = false;
+            }
+        }
+        if (score != 0.0f && targetPlayer != null)
+        {
+            var counter = targetPlayer.GetComponent<DistanceCounter>();
+            counter.PostScore(score, transform);
+        }
+        if (!wasDestroyed)
+        {
+            var audioSource = GetComponentInParent<AudioSource>();
+            if (audioSource != null)
+            {
+                if (!audioSource.isPlaying) audioSource.Play();
+            }
+        }
+        wasDestroyed = true;
     }
 }

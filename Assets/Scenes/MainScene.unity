@@ -312,6 +312,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1601432223}
+  - {fileID: 1121006922}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1442,6 +1443,99 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1121006921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1121006922}
+  - component: {fileID: 1121006925}
+  - component: {fileID: 1121006924}
+  - component: {fileID: 1121006923}
+  m_Layer: 5
+  m_Name: Score - Player 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1121006922
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121006921}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 39203716}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -32}
+  m_SizeDelta: {x: 350.3, y: 78}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &1121006923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121006921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab7d27d3c76093438f9658a7f7bbb3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreCounter: {fileID: 1708300878}
+--- !u!114 &1121006924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121006921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.65094894, g: 0.8773585, b: 0.45937166, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 21cdb7e1dcc000646bde115dc6513aef, type: 3}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 64
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &1121006925
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121006921}
+  m_CullTransparentMesh: 0
 --- !u!1 &1122382621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1885,6 +1979,7 @@ GameObject:
   - component: {fileID: 1491036494}
   - component: {fileID: 1491036495}
   - component: {fileID: 1491036490}
+  - component: {fileID: 1491036496}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2107,6 +2202,27 @@ MonoBehaviour:
   disableColliders: 0
   wasDestroyed: 0
   destroyedSprite: {fileID: 0}
+--- !u!114 &1491036496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491036488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450794ef625e4784ab9c687e7f2e7b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0
+  scoreMultiplier: 10
+  screenCamera: {fileID: 519420031}
+  positiveScoreText: {fileID: 5134567289014762963, guid: a121fa0b7f498b343b361021973480e3,
+    type: 3}
+  negativeScoreText: {fileID: 5838927864001740381, guid: 3c537aefc929a13498ba5357c0761f7e,
+    type: 3}
+  player: {fileID: 1491036489}
+  canvas: {fileID: 39203715}
 --- !u!1 &1555331750
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,7 +2377,7 @@ GameObject:
   - component: {fileID: 1601432224}
   - component: {fileID: 1601432226}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Score - Player 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2281,11 +2397,11 @@ RectTransform:
   m_Father: {fileID: 39203716}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 536.1, y: 354.6}
-  m_SizeDelta: {x: 350.3, y: 78}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -40, y: -32}
+  m_SizeDelta: {x: 350.30005, y: 78}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &1601432224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2299,7 +2415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9528302, g: 0.80926037, b: 0.31910825, a: 1}
+  m_Color: {r: 0.45834818, g: 0.77188736, b: 0.9433962, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2337,17 +2453,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1601432222}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 450794ef625e4784ab9c687e7f2e7b65, type: 3}
+  m_Script: {fileID: 11500000, guid: aab7d27d3c76093438f9658a7f7bbb3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 0
-  scoreMultiplier: 10
-  screenCamera: {fileID: 519420031}
-  positiveScoreText: {fileID: 5134567289014762963, guid: a121fa0b7f498b343b361021973480e3,
-    type: 3}
-  negativeScoreText: {fileID: 5838927864001740381, guid: 3c537aefc929a13498ba5357c0761f7e,
-    type: 3}
-  player: {fileID: 1491036489}
+  scoreCounter: {fileID: 1491036496}
 --- !u!1 &1614007006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2592,6 +2701,7 @@ GameObject:
   - component: {fileID: 1708300873}
   - component: {fileID: 1708300872}
   - component: {fileID: 1708300871}
+  - component: {fileID: 1708300878}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Player
@@ -2814,6 +2924,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1708300878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708300870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450794ef625e4784ab9c687e7f2e7b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0
+  scoreMultiplier: 10
+  screenCamera: {fileID: 519420031}
+  positiveScoreText: {fileID: 5134567289014762963, guid: a121fa0b7f498b343b361021973480e3,
+    type: 3}
+  negativeScoreText: {fileID: 5838927864001740381, guid: 3c537aefc929a13498ba5357c0761f7e,
+    type: 3}
+  player: {fileID: 1708300875}
+  canvas: {fileID: 39203715}
 --- !u!1 &1785799639
 GameObject:
   m_ObjectHideFlags: 0

@@ -147,7 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e4da4bb96fd3e4eb25baece0f7f919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollingScaling: 0.5
+  scrollingScaling: 0.7
+  destroyPositionOffset: 4
 --- !u!114 &5082630841990722414
 MonoBehaviour:
   m_ObjectHideFlags: 0
