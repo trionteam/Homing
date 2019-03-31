@@ -62,13 +62,6 @@ public class PlayerController : MonoBehaviour
         float verticalAxis = alive ? Input.GetAxis(verticalAxisName) : 0.0f;
         var accelerationMagnitude = Mathf.Sqrt(horizontalAxis * horizontalAxis + verticalAxis * verticalAxis);
 
-        if (!GameController.Instance.gameStarted)
-        {
-            // Activate the player if they moved at least a bit before the start of the game.
-            // TODO(ondrasej): Allow activating the player before they disappear from the screen.
-            if (accelerationMagnitude > 0.0f) isActive = true;
-        }
-
         // Tilt the player according to the velocity in the previous frame.
         var angle = Mathf.Max(minTilt, Mathf.Min(maxTilt, baseTilt - tiltScaling * horizontalAxis));
         rb.rotation = Mathf.LerpAngle(rb.rotation, angle, 0.1f);
@@ -93,6 +86,13 @@ public class PlayerController : MonoBehaviour
         rb.position = position;
 
         transform.position = new Vector3(position.x, position.y, transform.position.z);
+
+        // At the beginning of the game, allow activating the second player before they
+        // get out of the screen.
+        if (position.x >= MinX)
+        {
+            if (accelerationMagnitude > 0.0f) isActive = true;
+        }
 
         // Update the pitch.
         var audio = GetComponent<AudioSource>();
