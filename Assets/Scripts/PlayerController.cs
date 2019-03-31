@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
 
     public bool isLastPlayer = false;
 
+    public bool isActive = false;
+
     void Start()
     {
         if (string.IsNullOrEmpty(horizontalAxisName)) horizontalAxisName = "Horizontal" + controlSuffix;
@@ -60,6 +62,13 @@ public class PlayerController : MonoBehaviour
         float verticalAxis = alive ? Input.GetAxis(verticalAxisName) : 0.0f;
         var accelerationMagnitude = Mathf.Sqrt(horizontalAxis * horizontalAxis + verticalAxis * verticalAxis);
 
+        if (!GameController.Instance.gameStarted)
+        {
+            // Activate the player if they moved at least a bit before the start of the game.
+            // TODO(ondrasej): Allow activating the player before they disappear from the screen.
+            if (accelerationMagnitude > 0.0f) isActive = true;
+        }
+
         // Tilt the player according to the velocity in the previous frame.
         var angle = Mathf.Max(minTilt, Mathf.Min(maxTilt, baseTilt - tiltScaling * horizontalAxis));
         rb.rotation = Mathf.LerpAngle(rb.rotation, angle, 0.1f);
@@ -67,11 +76,12 @@ public class PlayerController : MonoBehaviour
         var playerVelocity = Vector2.zero;
         if (alive)
         {
-            playerVelocity = new Vector2(velocityModifier * (velocityScaling * horizontalAxis + scrollingController.scrollingSpeed),
-                                         velocityModifier * velocityScaling * verticalAxis);
+            var velocityX = velocityScaling * horizontalAxis;
+            if (isActive) velocityX += scrollingController.scrollingSpeed;
+            var velocityY = velocityScaling * verticalAxis;
+            playerVelocity = velocityModifier * new Vector2(velocityX, velocityY);
         }
         var targetVelocity = playerVelocity + scrollVelocity;
-        //if (!IsAlive) targetVelocity -= scrollVelocity;
         rb.velocity = Vector2.Lerp(rb.velocity, targetVelocity, 0.3f);
 
         var position = rb.position;
@@ -79,7 +89,7 @@ public class PlayerController : MonoBehaviour
         if (position.y > maxY) position.y = maxY;
 
         if (position.x > MaxX) position.x = MaxX;
-        if ((alive || isLastPlayer) && position.x < MinX) position.x = MinX;
+        if (isActive && (alive || isLastPlayer) && position.x < MinX) position.x = MinX;
         rb.position = position;
 
         transform.position = new Vector3(position.x, position.y, transform.position.z);
@@ -116,15 +126,23 @@ public class PlayerController : MonoBehaviour
             sprite.sprite = states[state];
         }
 
-        if (alive)
+        if (alive && isActive)
         {
             int alivePlayers = 0;
             foreach (var playerObject in GameObject.FindGameObjectsWithTag(Tags.Player))
             {
                 var player = playerObject.GetComponent<PlayerController>();
-                if (player.IsAlive) alivePlayers++;
+                if (player.IsAlive && player.isActive) alivePlayers++;
             }
             isLastPlayer = alivePlayers == 1;
+        }
+    }
+
+    public bool IsTarget
+    {
+        get
+        {
+            return isActive && IsAlive;
         }
     }
 
@@ -134,6 +152,20 @@ public class PlayerController : MonoBehaviour
         {
             var health = GetComponent<HealthController>();
             return health.health > 0.0f;
+        }
+    }
+
+    public static int NumPlayersAlive
+    {
+        get
+        {
+            int numPlayersAlive = 0;
+            foreach (var playerObject in GameObject.FindGameObjectsWithTag(Tags.Player))
+            {
+                var player = playerObject.GetComponent<PlayerController>();
+                if (player.IsAlive && player.isActive) numPlayersAlive++;
+            }
+            return numPlayersAlive;
         }
     }
 }

@@ -33,7 +33,7 @@ public class MissileController : MonoBehaviour
         foreach (var playerObject in playerObjects)
         {
             var player = playerObject.GetComponent<PlayerController>();
-            if (skipDead && !player.IsAlive) continue;
+            if (skipDead && !player.IsTarget) continue;
             var distance = (transform.position - playerObject.transform.position).sqrMagnitude;
             if (distance < minDistance)
             {

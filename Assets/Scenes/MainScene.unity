@@ -1588,9 +1588,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollingController: {fileID: 1227752480}
-  deathSlowdown: 0.01
-  deathTime: 0
+  unlockRestartTime: 0
   deathDelay: 3
+  gameStarted: 0
+  generatorsToActivate:
+  - {fileID: 984462799}
+  - {fileID: 1661995910}
+  generatorActivationDelay: 3
+  delayedGeneratorsToActivate:
+  - {fileID: 1875282673}
   generatorsToDeactivate:
   - {fileID: 984462799}
   - {fileID: 1661995910}
@@ -1638,7 +1644,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9a0eaf6a680164f966560a66e1d678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollingSpeed: 3
+  scrollingSpeed: 0
+  targetScrollingSpeed: 3
+  slowdownFactor: 0.01
+  speedupFactor: 0.1
 --- !u!1 &1253004945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,6 +1927,8 @@ MonoBehaviour:
   verticalAxisName: 
   controlSuffix: -1
   wheel: {fileID: 1253004946}
+  isLastPlayer: 0
+  isActive: 0
 --- !u!70 &1491036490
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2764,6 +2775,8 @@ MonoBehaviour:
   verticalAxisName: 
   controlSuffix: -2
   wheel: {fileID: 1045698223}
+  isLastPlayer: 0
+  isActive: 0
 --- !u!50 &1708300876
 Rigidbody2D:
   serializedVersion: 4
@@ -3042,13 +3055,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100f0e47b46e8d2458126b085073748b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missilesDelay: 3
-  scrollingController: {fileID: 1227752480}
-  generatorsToActivate:
-  - {fileID: 984462799}
-  - {fileID: 1661995910}
-  delayedGeneratorsToActivate:
-  - {fileID: 1875282673}
 --- !u!68 &1874876737
 EdgeCollider2D:
   m_ObjectHideFlags: 0
