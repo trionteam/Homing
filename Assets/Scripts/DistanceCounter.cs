@@ -48,7 +48,7 @@ public class DistanceCounter : MonoBehaviour
     {
         ScrollingController scrollingController = ScrollingController.GetInstance();
 
-        if (player.isActive)
+        if (player.isActive && player.IsAlive)
         {
             distance += scrollingController.scrollingSpeed * Time.deltaTime;
             distance = Mathf.Max(0.0f, distance);
