@@ -4,33 +4,47 @@ using UnityEngine;
 
 public class LogoController : MonoBehaviour
 {
-    public float removeAfterDistance = 2.0f;
+    public float fadeoutDuration = 1.0f;
 
-    float scrolledDistance = 0.0f;
+    public float disappearAfterTime = 10.0f;
 
-    // Start is called before the first frame update
+    public bool isFadingOut = false;
+
+    float displayedTime = 0.0f;
+
+    float startFadeOutTime = 0.0f;
+
     void Start()
     {
-        scrolledDistance = 0.0f;
+        displayedTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        var scrollingController = ScrollingController.GetInstance();
-        scrolledDistance += Time.deltaTime * scrollingController.scrollingSpeed;
-
-        var percent = 1.0f - scrolledDistance / removeAfterDistance;
-        if (percent < 0.0f)
+        if (isFadingOut)
         {
-            Destroy(gameObject);
+            var percent = startFadeOutTime + fadeoutDuration - Time.time;
+            if (percent < 0.0f)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                var renderer = GetComponent<SpriteRenderer>();
+                var color = renderer.color;
+                color.a = percent;
+                renderer.color = color;
+            }
         }
-        else
+        else if (displayedTime + disappearAfterTime < Time.time ||
+                 Input.GetAxis("Horizontal-1") != 0.0f ||
+                 Input.GetAxis("Horizontal-2") != 0.0f ||
+                 Input.GetAxis("Vertical-1") != 0.0f ||
+                 Input.GetAxis("Vertical-2") != 0.0f)
         {
-            var renderer = GetComponent<SpriteRenderer>();
-            var color = renderer.color;
-            color.a = percent;
-            renderer.color = color;
+            isFadingOut = true;
+            startFadeOutTime = Time.time;
         }
     }
 }
