@@ -8,6 +8,8 @@ public class ScreenBoundsController : MonoBehaviour
 
     public Camera mainCamera = null;
 
+    public float maxAspectRatio = 16.0f / 9.0f;
+
     public float leftBound = -8.0f;
     public float rightBound = 8.0f;
     public float topBound = 5.0f;
@@ -39,11 +41,13 @@ public class ScreenBoundsController : MonoBehaviour
     {
         topBound = mainCamera.orthographicSize;
         bottomBound = -topBound;
-        
-        leftBound = -mainCamera.orthographicSize * mainCamera.aspect;
+
+        var aspect = Mathf.Min(mainCamera.aspect, maxAspectRatio);
+
+        leftBound = -mainCamera.orthographicSize * aspect;
         rightBound = -leftBound;
 
         screenHeight = 2.0f * mainCamera.orthographicSize;
-        screenWidth = mainCamera.aspect * screenHeight;
+        screenWidth = aspect * screenHeight;
     }
 }
