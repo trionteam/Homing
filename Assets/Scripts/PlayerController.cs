@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     public Sprite[] states = new Sprite[0];
     public SpriteRenderer sprite = null;
 
+    public CapsuleCollider2D missileCollider;
+
     public string horizontalAxisName = null;
     public string verticalAxisName = null;
     public string controlSuffix = "";
@@ -48,6 +50,8 @@ public class PlayerController : MonoBehaviour
     {
         if (string.IsNullOrEmpty(horizontalAxisName)) horizontalAxisName = "Horizontal" + controlSuffix;
         if (string.IsNullOrEmpty(verticalAxisName)) verticalAxisName = "Vertical" + controlSuffix;
+
+        missileCollider.enabled = false;
     }
 
     void FixedUpdate()
@@ -91,7 +95,11 @@ public class PlayerController : MonoBehaviour
         // get out of the screen.
         if (position.x >= MinX)
         {
-            if (accelerationMagnitude > 0.0f) isActive = true;
+            if (accelerationMagnitude > 0.0f && !isActive)
+            {
+                isActive = true;
+                missileCollider.enabled = true;
+            }
         }
 
         // Update the pitch.

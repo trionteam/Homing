@@ -2095,6 +2095,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 16c1b399261224246a838deedd25d3a3, type: 3}
   - {fileID: 21300000, guid: dd703daf78b14564394b83ebfe23230d, type: 3}
   sprite: {fileID: 1665622921}
+  missileCollider: {fileID: 1797327199}
   horizontalAxisName: 
   verticalAxisName: 
   controlSuffix: -1
@@ -3038,6 +3039,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2fbf10c05f326a243ae8380af89b0223, type: 3}
   - {fileID: 21300000, guid: e65323564b10df845b2b18db4ae0a66f, type: 3}
   sprite: {fileID: 432050950}
+  missileCollider: {fileID: 609763351}
   horizontalAxisName: 
   verticalAxisName: 
   controlSuffix: -2
