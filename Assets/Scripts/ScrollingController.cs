@@ -18,8 +18,15 @@ public class ScrollingController : MonoBehaviour
 
     public float targetScrollingSpeed = 3.0f;
 
+    public float targetTurboScrollingSpeed = 6.0f;
+    public float targetPartialTurboScrollingSpeed = 5.0f;
+
+    public float turboSpeedupFactor = 0.1f;
+
     public float slowdownFactor = 0.01f;
     public float speedupFactor = 0.1f;
+
+    public int numPlayersWithActiveTurbo = 0;
 
     ScrollingState state = ScrollingState.Stopped;
 
@@ -56,6 +63,16 @@ public class ScrollingController : MonoBehaviour
                 {
                     state = ScrollingState.Stopped;
                 }
+                break;
+            case ScrollingState.Scrolling:
+                float targetSpeed = targetScrollingSpeed;
+                if (numPlayersWithActiveTurbo > 0)
+                {
+                    int numActivePlayers = PlayerController.NumPlayersAlive;
+                    targetSpeed = numPlayersWithActiveTurbo == numActivePlayers ?
+                                  targetTurboScrollingSpeed : targetPartialTurboScrollingSpeed;
+                }
+                scrollingSpeed = Mathf.Lerp(scrollingSpeed, targetSpeed, turboSpeedupFactor);
                 break;
         }
     }

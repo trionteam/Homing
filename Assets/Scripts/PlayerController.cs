@@ -19,9 +19,14 @@ public class PlayerController : MonoBehaviour
     public float maxTilt = 45.0f;
     public float minTilt = -45.0f;
 
+    public float turboTilt = -45.0f;
+
     public float tiltScaling = 15.0f;
 
     public float velocityModifier = 1.0f;
+
+    public float turboVelocityXScaling = 2.0f;
+    public float turboVelocityYScaling = 0.5f;
 
     public float basePitch = 0.4f;
     public float pitchRatio = 0.2f;
@@ -38,6 +43,7 @@ public class PlayerController : MonoBehaviour
 
     public string horizontalAxisName = null;
     public string verticalAxisName = null;
+    public string turboButtonName = null;
     public string controlSuffix = "";
 
     public Transform wheel;
@@ -46,10 +52,29 @@ public class PlayerController : MonoBehaviour
 
     public bool isActive = false;
 
+    public bool turboIsActive = false;
+    /// <summary>
+    /// The current capacity of the turbo (in seconds).
+    /// </summary>
+    public float turboCapacity = 0.0f;
+    /// <summary>
+    /// The minimal turbo capacity required to activate the turbo.
+    /// </summary>
+    public float minTurboCapacity = 0.2f;
+    /// <summary>
+    /// The maximal turbo capacity. Turbo is not recharged beyond this level.
+    /// </summary>
+    public float maxTurboCapacity = 2.0f;
+    /// <summary>
+    /// The ratio at which turbo is recharged.
+    /// </summary>
+    public float turboRechargeRatio = 0.3f;
+
     void Start()
     {
         if (string.IsNullOrEmpty(horizontalAxisName)) horizontalAxisName = "Horizontal" + controlSuffix;
         if (string.IsNullOrEmpty(verticalAxisName)) verticalAxisName = "Vertical" + controlSuffix;
+        if (string.IsNullOrEmpty(turboButtonName)) turboButtonName = "Turbo" + controlSuffix;
 
         missileCollider.enabled = false;
     }
@@ -66,16 +91,58 @@ public class PlayerController : MonoBehaviour
         float verticalAxis = alive ? Input.GetAxis(verticalAxisName) : 0.0f;
         var accelerationMagnitude = Mathf.Sqrt(horizontalAxis * horizontalAxis + verticalAxis * verticalAxis);
 
+        bool turbo = Input.GetButton(turboButtonName) &&
+                     turboCapacity > 0.0f &&
+                     scrollingController.scrollingSpeed > 0.0f &&
+                     isActive &&
+                     IsAlive;
+        if (turbo && !turboIsActive)
+        {
+            if (turboCapacity > minTurboCapacity)
+            {
+                scrollingController.numPlayersWithActiveTurbo++;
+            }
+            else
+            {
+                // Do not allow activating turbo if the capacity is too low.
+                turbo = false;
+            }
+        }
+        else if (!turbo && turboIsActive)
+        {
+            scrollingController.numPlayersWithActiveTurbo--;
+        }
+        turboIsActive = turbo;
+
+        // Update turbo capacity.
+        if (turboIsActive)
+        {
+            turboCapacity -= Time.fixedDeltaTime;
+        }
+        else if (isActive && scrollingController.scrollingSpeed > 0.0f)
+        {
+            turboCapacity += turboRechargeRatio * Time.fixedDeltaTime;
+        }
+        turboCapacity = Mathf.Max(turboCapacity, 0.0f);
+        turboCapacity = Mathf.Min(turboCapacity, maxTurboCapacity);
+
         // Tilt the player according to the velocity in the previous frame.
-        var angle = Mathf.Max(minTilt, Mathf.Min(maxTilt, baseTilt - tiltScaling * horizontalAxis));
+        var angle = turboIsActive ? turboTilt :
+            Mathf.Max(minTilt, Mathf.Min(maxTilt, baseTilt - tiltScaling * horizontalAxis));
         rb.rotation = Mathf.LerpAngle(rb.rotation, angle, 0.1f);
 
         var playerVelocity = Vector2.zero;
         if (alive)
         {
             var velocityX = velocityScaling * horizontalAxis;
-            if (isActive) velocityX += scrollingController.scrollingSpeed;
             var velocityY = velocityScaling * verticalAxis;
+            if (turbo)
+            {
+                velocityX *= turboVelocityXScaling;
+                velocityY *= turboVelocityYScaling;
+            }
+            if (isActive) velocityX += scrollingController.scrollingSpeed;
+
             playerVelocity = velocityModifier * new Vector2(velocityX, velocityY);
         }
         var targetVelocity = playerVelocity + scrollVelocity;

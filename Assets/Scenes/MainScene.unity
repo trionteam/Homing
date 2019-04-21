@@ -312,7 +312,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1601432223}
+  - {fileID: 996767731}
   - {fileID: 1121006922}
+  - {fileID: 470145823}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -748,6 +750,97 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &470145822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 470145823}
+  - component: {fileID: 470145826}
+  - component: {fileID: 470145825}
+  - component: {fileID: 470145824}
+  m_Layer: 5
+  m_Name: Turbo - Player 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &470145823
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470145822}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 39203716}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40.00006, y: -132}
+  m_SizeDelta: {x: 104.19995, y: 13.099976}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &470145824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470145822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 593553b1c9d59fd4fab1128da360d7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1708300875}
+  maxWidth: 0
+  canActivateTurboAlpha: 0.9
+  canNotActivateTurboAlpha: 0.45
+--- !u!114 &470145825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470145822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.6509804, g: 0.8784314, b: 0.45882353, a: 0.9019608}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &470145826
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470145822}
+  m_CullTransparentMesh: 0
 --- !u!1 &501999408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,6 +1457,97 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &996767730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 996767731}
+  - component: {fileID: 996767733}
+  - component: {fileID: 996767732}
+  - component: {fileID: 996767734}
+  m_Layer: 5
+  m_Name: Turbo - Player 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &996767731
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996767730}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 39203716}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -40.000122, y: -132}
+  m_SizeDelta: {x: 104.19995, y: 13.099976}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!114 &996767732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996767730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.45882353, g: 0.77254903, b: 0.94509804, a: 0.9019608}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &996767733
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996767730}
+  m_CullTransparentMesh: 0
+--- !u!114 &996767734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996767730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 593553b1c9d59fd4fab1128da360d7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1491036489}
+  maxWidth: 0
+  canActivateTurboAlpha: 0.9
+  canNotActivateTurboAlpha: 0.45
 --- !u!1 &1045698222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,7 +1658,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 39203716}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1740,8 +1924,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollingSpeed: 0
   targetScrollingSpeed: 3
+  targetTurboScrollingSpeed: 6
+  turboSpeedupFactor: 0.1
   slowdownFactor: 0.01
   speedupFactor: 0.1
+  numPlayersWithActiveTurbo: 0
 --- !u!1 &1253004945
 GameObject:
   m_ObjectHideFlags: 0
@@ -2083,8 +2270,11 @@ MonoBehaviour:
   baseTilt: -5
   maxTilt: 15
   minTilt: -30
+  turboTilt: -35
   tiltScaling: 15
   velocityModifier: 1
+  turboVelocityXScaling: 2
+  turboVelocityYScaling: 0.5
   basePitch: 0.4
   pitchRatio: 0.2
   wheelRotationScaling: 100
@@ -2098,10 +2288,16 @@ MonoBehaviour:
   missileCollider: {fileID: 1797327199}
   horizontalAxisName: 
   verticalAxisName: 
+  turboButtonName: 
   controlSuffix: -1
   wheel: {fileID: 1253004946}
   isLastPlayer: 0
   isActive: 0
+  turboIsActive: 0
+  turboCapacity: 0
+  minTurboCapacity: 1.5
+  maxTurboCapacity: 5
+  turboRechargeRatio: 0.3
 --- !u!70 &1491036490
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3027,8 +3223,11 @@ MonoBehaviour:
   baseTilt: -5
   maxTilt: 15
   minTilt: -30
+  turboTilt: -35
   tiltScaling: 15
   velocityModifier: 1
+  turboVelocityXScaling: 2
+  turboVelocityYScaling: 0.5
   basePitch: 0.4
   pitchRatio: 0.2
   wheelRotationScaling: 100
@@ -3042,10 +3241,16 @@ MonoBehaviour:
   missileCollider: {fileID: 609763351}
   horizontalAxisName: 
   verticalAxisName: 
+  turboButtonName: 
   controlSuffix: -2
   wheel: {fileID: 1045698223}
   isLastPlayer: 0
   isActive: 0
+  turboIsActive: 0
+  turboCapacity: 0
+  minTurboCapacity: 1.5
+  maxTurboCapacity: 5
+  turboRechargeRatio: 0.3
 --- !u!50 &1708300876
 Rigidbody2D:
   serializedVersion: 4
