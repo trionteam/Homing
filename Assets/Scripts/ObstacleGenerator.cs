@@ -12,6 +12,8 @@ public class ObstacleGenerator : MonoBehaviour
 
         public ObstacleController item;
         public ObstacleController Item { get { return item;  } }
+
+        public float startTime;
     }
 
     public WeightedObstacleController[] weightedObstaclePrefabs = new WeightedObstacleController[0];
@@ -41,7 +43,9 @@ public class ObstacleGenerator : MonoBehaviour
             var delta = maxObstacleY - minObstacleY;
             var obstaclePositionY = minObstacleY + Random.value * delta;
             var newObstaclePosition = new Vector3(ObstaclePositionX, obstaclePositionY, transform.position.z);
-            var prefab = WeightedChoice.Choice<WeightedObstacleController, ObstacleController>(weightedObstaclePrefabs);
+            var prefab = WeightedChoice.ChoiceWithFilter<WeightedObstacleController, ObstacleController>(
+                             weightedObstaclePrefabs,
+                             item => item.startTime <= Time.time - GameController.Instance.startGameTime);
             var obstacle = Instantiate(prefab, newObstaclePosition, Quaternion.identity);
             nextObstacleTime += obstacleTime;
         }

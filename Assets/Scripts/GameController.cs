@@ -22,6 +22,8 @@ public class GameController : MonoBehaviour
 
     public bool gameStarted = false;
 
+    public float startGameTime = 0.0f;
+
     public GameObject[] generatorsToActivate = new GameObject[0];
     public float generatorActivationDelay = 3.0f;
     public GameObject[] delayedGeneratorsToActivate = new GameObject[0];
@@ -74,6 +76,7 @@ public class GameController : MonoBehaviour
         if (gameStarted) return;
 
         gameStarted = true;
+        startGameTime = Time.time;
         scrollingController.StartScrolling();
         foreach (var generator in generatorsToActivate)
         {

@@ -785,7 +785,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40.00006, y: -132}
+  m_AnchoredPosition: {x: 40, y: -132}
   m_SizeDelta: {x: 104.19995, y: 13.099976}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &470145824
@@ -1430,14 +1430,22 @@ MonoBehaviour:
   weightedObstaclePrefabs:
   - weight: 2
     item: {fileID: 3638612788802725130, guid: 2743e0f325242e4419917cbda9f2f1bd, type: 3}
+    startTime: 0
   - weight: 9
     item: {fileID: 6422837949397858175, guid: 4af1900d5b005dd49a2e19fa36c644ff, type: 3}
+    startTime: 0
   - weight: 3
     item: {fileID: 381818489840803146, guid: 2c14eeba33bc1b847bf75e05429c09ca, type: 3}
+    startTime: 0
   - weight: 0.5
     item: {fileID: 6422837949397858175, guid: 0eb5999ad823cab4cabf9900738d33dc, type: 3}
-  - weight: 0.1
+    startTime: 0
+  - weight: 0.2
     item: {fileID: 6422837949397858175, guid: e184bec88b3a67940b30faa7c7b5696f, type: 3}
+    startTime: 0
+  - weight: 1
+    item: {fileID: 448415432091035590, guid: c84815ebe73ab124cb2e22d57cea4ae5, type: 3}
+    startTime: 40
   obstacleTime: 1.3
   nextObstacleTime: 0
   newObstaclePositionOffset: 4
@@ -2922,6 +2930,7 @@ MonoBehaviour:
   weightedObstaclePrefabs:
   - weight: 0
     item: {fileID: 6422837949397858175, guid: 5a18001472bd8ee439c299faa9173916, type: 3}
+    startTime: 0
   obstacleTime: 3
   nextObstacleTime: 0
   newObstaclePositionOffset: 4

@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         float verticalAxis = alive ? Input.GetAxis(verticalAxisName) : 0.0f;
         var accelerationMagnitude = Mathf.Sqrt(horizontalAxis * horizontalAxis + verticalAxis * verticalAxis);
 
-        bool turbo = Input.GetButton(turboButtonName) &&
+        bool turbo = Input.GetAxis(turboButtonName) > 0.75f &&
                      turboCapacity > 0.0f &&
                      scrollingController.scrollingSpeed > 0.0f &&
                      isActive &&

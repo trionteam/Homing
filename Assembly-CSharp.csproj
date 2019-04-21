@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\HealthController.cs" />
     <Compile Include="Assets\Scripts\KeyboardController.cs" />
     <Compile Include="Assets\Scripts\LogoController.cs" />
+    <Compile Include="Assets\Scripts\MineController.cs" />
     <Compile Include="Assets\Scripts\MissileController.cs" />
     <Compile Include="Assets\Scripts\MissileGenerator.cs" />
     <Compile Include="Assets\Scripts\ObstacleController.cs" />
