@@ -5,9 +5,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C12CEEC6-100C-58A2-DE36-314E4DE5E40B}</ProjectGuid>
+    <ProjectGuid>{E39D021A-24A3-CC45-6B3B-9304A0479D9A}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Unity.CollabProxy.Editor</AssemblyName>
+    <AssemblyName>UnityEditor.XR.LegacyInputHelpers</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
@@ -628,23 +628,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\AssemblyInfo.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\Bootstrap.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\CollabAnalytics.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\CollabHistoryWindow.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\CollabToolbarButton.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\CollabToolbarWindow.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\Presenters\CollabHistoryPresenter.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\Views\BuildStatusButton.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\Views\CollabHistoryDropDown.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\Views\CollabHistoryDropDownItem.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\Views\CollabHistoryItem.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\Views\CollabHistoryItemFactory.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\Views\CollabHistoryRevisionLine.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\Views\HistoryProgressSpinner.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\Views\ICollabHistoryItemFactory.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\Views\PagedListView.cs" />
-    <Compile Include="Packages\com.unity.collab-proxy\Editor\Collab\Views\StatusView.cs" />
+    <ProjectReference Include="UnityEngine.XR.LegacyInputHelpers.csproj">
+      <Project>{8E7C73A3-7719-6FE2-0D0D-A83EDAB504C7}</Project>
+      <Name>UnityEngine.XR.LegacyInputHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.SpatialTracking.csproj">
+      <Project>{EDE48CFA-E9C6-66CB-F43E-070EAA2E76B0}</Project>
+      <Name>UnityEngine.SpatialTracking</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Packages\com.unity.xr.legacyinputhelpers\Editor\ArmModels\ArmModelEditor.cs" />
+    <Compile Include="Packages\com.unity.xr.legacyinputhelpers\Editor\ArmModels\SwingArmModelEditor.cs" />
+    <Compile Include="Packages\com.unity.xr.legacyinputhelpers\Editor\ArmModels\TransitionArmModelEditor.cs" />
+    <Compile Include="Packages\com.unity.xr.legacyinputhelpers\Editor\SeedXRInputBindings\SeedXRInputBindings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Packages\com.unity.collab-proxy\Editor\Resources\Styles\CollabHistoryCommon.uss" />
