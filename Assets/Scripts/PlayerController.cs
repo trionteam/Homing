@@ -70,6 +70,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public float turboRechargeRatio = 0.3f;
 
+    public float turboSlowdown = 0.3f;
+
     void Start()
     {
         if (string.IsNullOrEmpty(horizontalAxisName)) horizontalAxisName = "Horizontal" + controlSuffix;
@@ -138,8 +140,13 @@ public class PlayerController : MonoBehaviour
             var velocityY = velocityScaling * verticalAxis;
             if (turbo)
             {
-                velocityX *= turboVelocityXScaling;
                 velocityY *= turboVelocityYScaling;
+                // Move player towards the left side of the screen; in multiplayer, we do this
+                // only when both players activated turbo.
+                if (scrollingController.numPlayersWithActiveTurbo == NumPlayersAlive)
+                {
+                    velocityX -= turboSlowdown;
+                }
             }
             if (isActive) velocityX += scrollingController.scrollingSpeed;
 
