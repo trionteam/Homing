@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
         {
             turboCapacity -= Time.fixedDeltaTime;
         }
-        else if (isActive && scrollingController.scrollingSpeed > 0.0f)
+        else if (isActive && IsAlive && scrollingController.scrollingSpeed > 0.0f)
         {
             turboCapacity += turboRechargeRatio * Time.fixedDeltaTime;
         }
