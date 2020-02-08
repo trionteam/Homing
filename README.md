@@ -10,7 +10,7 @@ You can play the game on-line in your browser on [itch.io](https://trionteam.itc
 
 # Development
 
-The source code and all resources are on [BitBucket](https://bitbucket.org/ondrasej/homing).
+The source code and all resources are on [GitHub](https://github.com/trionteam/Homing/).
 
 You will need a recent version of Unity to build the game, otherwise everything is in the repository. The game should also build on Windows, Linux and Mac.
 
